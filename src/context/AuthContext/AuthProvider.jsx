@@ -4,6 +4,7 @@ import auth from "../../firebase/firebase.init";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 const AuthProvider = ({ children }) => {
@@ -15,10 +16,15 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  const signInUser = (email, password) => {
+    setLoading(true);
+   return signInWithEmailAndPassword(auth, email, password);
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log('state captured',currentUser);
+      console.log("state captured", currentUser);
       setLoading(false);
     });
 
@@ -31,6 +37,7 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     creatUser,
+    signInUser
   };
 
   return (
