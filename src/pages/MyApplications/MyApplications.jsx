@@ -6,7 +6,7 @@ const MyApplications = () => {
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/job_applications?email=${user.email}`)
+    fetch(`http://localhost:5000/job-applications?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => setJobs(data));
   }, [user.email]);
